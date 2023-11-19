@@ -1,0 +1,4 @@
+
+
+class DonationCampaignIpfsGatewayController:
+    pass
