@@ -22,7 +22,15 @@ class UserIpfsGatewayService:
 
     @staticmethod
     def getUserIpfsData(walletAddress):
-        return IpfsHelper.fetchData(UserIpfsGateway.objects.get(walletAddress = walletAddress).cid)
+        try:
+            return IpfsHelper.fetchData(UserIpfsGateway.objects.get(walletAddress = walletAddress).cid)
+        except UserIpfsGateway.DoesNotExist:
+            return {
+                "walletAddress": "",
+                "username": "",
+                "profilePic": "",
+                "donations": {}
+            }
     
     @staticmethod
     def getAllUserIpfsData():
