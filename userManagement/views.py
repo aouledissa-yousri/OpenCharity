@@ -1,6 +1,5 @@
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
-from django.views import View
 from .controllers import UserController
 from helpers import RequestHelper
 

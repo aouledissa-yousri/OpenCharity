@@ -13,7 +13,7 @@ class DonationCampaign:
         self.__openStatus = False
         self.__dateCreated = date.today()
 
-    def getId(self):
+    def getId(self) -> str:
         return self.__id
     
     def getTitle(self):

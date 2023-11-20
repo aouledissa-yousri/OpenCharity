@@ -1,22 +1,25 @@
-
+from ..services import DonationCampaignService
 
 class DonationCampaignController:
 
 
+    @staticmethod
     def getDonationCampaigns():
-        pass
+        return DonationCampaignService.getDonationCampaigns() 
 
-    def getDonationCampaign():
-        pass
+    @staticmethod
+    def getDonationCampaign(id):
+        return DonationCampaignService.getDonationCampaign(id)
+
+    @staticmethod
+    def createDonationCampaign(data):
+        return DonationCampaignService.createDonationCampaign(data)
     
+    @staticmethod
+    def updateDonationCampaign(data, id):
+        return DonationCampaignService.updateDonationCampaign(data, id)
 
-    def createDonationCampaign():
-        pass
-
-    
-    def updateDonationCampaign():
-        pass
-
-    def deleteDonationCampaign():
-        pass
+    @staticmethod
+    def deleteDonationCampaign(id):
+        return DonationCampaignService.deleteDonationCampaign(id)
 
