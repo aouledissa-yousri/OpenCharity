@@ -5,7 +5,7 @@
 
 # Install dependencies
 
-  1. pip install -r requirements.txt
+  1. cat requirements.txt | xargs -n 1 pip install
 
 # Update dependencies
 
