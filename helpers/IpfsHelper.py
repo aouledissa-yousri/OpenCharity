@@ -1,5 +1,6 @@
 import json
 import requests
+from helpers import StringHelper
 
 
 class IpfsHelper:
@@ -22,7 +23,7 @@ class IpfsHelper:
 
                 json={
                     "pinataContent" : data,
-                    "pinataMetadata": { "name": data["walletAddress"] }
+                    "pinataMetadata": { "name": StringHelper.generateRandomString() }
                 },
 
                 headers = {
