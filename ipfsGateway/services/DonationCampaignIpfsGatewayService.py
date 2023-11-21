@@ -1,4 +1,5 @@
 from ..models import DonationCampaignIpfsGateway
+from helpers import IpfsHelper
 
 class DonationCampaignIpfsGatewayService:
     
@@ -9,13 +10,32 @@ class DonationCampaignIpfsGatewayService:
         return True
 
     @staticmethod
-    def deleteDonationCampaignIpfsRecord():
-        pass
+    def deleteDonationCampaignIpfsRecord(id):
+        DonationCampaignIpfsGateway.objects.filter(id=id).delete()
+        return {"code": 200}
 
     @staticmethod
-    def updateDonationCampaignIpfsRecord():
-        pass
+    def updateDonationCampaignIpfsRecord(id, cid):
+        donationCampaignIpfsRecord = DonationCampaignIpfsGateway.objects.get(id=id)
+        donationCampaignIpfsRecord.cid = cid
+        donationCampaignIpfsRecord.save()
+        return True
 
     @staticmethod
-    def getDonationCampaignIpfsRecord():
-        pass
+    def getDonationCampaignIpfsRecord(id):
+        try:
+            return IpfsHelper.fetchData(DonationCampaignIpfsGateway.objects.get(id = id).cid)
+        except DonationCampaignIpfsGateway.DoesNotExist:
+            return {
+                "id": "",
+                "title": "",
+                "description": "",
+                "beneficiary": "",
+                "donations": "",
+                "openStatus": "",
+                "dateCreated": ""
+            }
+
+    @staticmethod
+    def getDonationCampaignsIpfsRecord():
+        return [IpfsHelper.fetchData(donationCampaign.cid) for donationCampaign in DonationCampaignIpfsGateway.objects.all()]

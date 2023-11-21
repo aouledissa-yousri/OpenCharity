@@ -7,13 +7,17 @@ class DonationCampaignIpfsGatewayController:
         return DonationCampaignIpfsGatewayService.saveDonationCampaignIpfsRecord(id, cid)
 
     @staticmethod
-    def deleteDonationCampaignIpfsRecord():
-        pass
+    def deleteDonationCampaignIpfsRecord(id):
+        return DonationCampaignIpfsGatewayService.deleteDonationCampaignIpfsRecord(id)
 
     @staticmethod
-    def updateDonationCampaignIpfsRecord():
-        pass
+    def updateDonationCampaignIpfsRecord(id, cid):
+        return DonationCampaignIpfsGatewayService.updateDonationCampaignIpfsRecord(id, cid)
 
     @staticmethod
-    def getDonationCampaignIpfsRecord():
-        pass
+    def getDonationCampaignsIpfsRecord():
+        return DonationCampaignIpfsGatewayService.getDonationCampaignsIpfsRecord()
+
+    @staticmethod
+    def getDonationCampaignIpfsRecord(id):
+        return DonationCampaignIpfsGatewayService.getDonationCampaignIpfsRecord(id)

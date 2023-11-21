@@ -1,6 +1,6 @@
 import json
 import requests
-from helpers import StringHelper
+from .StringHelper import StringHelper
 
 
 class IpfsHelper:
@@ -17,6 +17,7 @@ class IpfsHelper:
 
     @staticmethod
     def uploadData(data):
+        print(data)
         return json.loads(
             requests.post(
                 IpfsHelper.__URL, 

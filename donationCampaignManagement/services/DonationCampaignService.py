@@ -6,10 +6,10 @@ from ipfsGateway.controllers import DonationCampaignIpfsGatewayController
 class DonationCampaignService: 
     
     def getDonationCampaigns():
-        pass
+        return DonationCampaignIpfsGatewayController.getDonationCampaignsIpfsRecord()
 
     def getDonationCampaign(id):
-        pass
+        return DonationCampaignIpfsGatewayController.getDonationCampaignIpfsRecord(id)
     
 
     def createDonationCampaign(data):
@@ -19,7 +19,19 @@ class DonationCampaignService:
 
     
     def updateDonationCampaign(data, id):
-        pass
+        donationCampaignData = DonationCampaignIpfsGatewayController.getDonationCampaignIpfsRecord(id)
+        donationCampaign = DonationCampaign(
+            donationCampaignData["id"],
+            donationCampaignData["title"],
+            donationCampaignData["description"],
+            donationCampaignData["beneficiary"],
+            donationCampaignData["donations"],
+            donationCampaignData["openStatus"]
+        )
+        donationCampaign.update(data["title"], data["description"], data["openStatus"])
+
+        DonationCampaignIpfsGatewayController.updateDonationCampaignIpfsRecord(id, IpfsHelper.uploadData(donationCampaign.getData())["IpfsHash"])
+        return donationCampaign.getData()
 
     def deleteDonationCampaign(id):
-        pass
+        return DonationCampaignIpfsGatewayController.deleteDonationCampaignIpfsRecord(id)

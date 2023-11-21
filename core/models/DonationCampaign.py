@@ -1,19 +1,19 @@
-from datetime import date
+from datetime import date, datetime
 import core.models.User as User
 import core.models.Donation as Donation
 
 class DonationCampaign: 
 
-    def __init__(self, id, title, description, beneficiary):
-        self.__id = id,
+    def __init__(self, id, title, description, beneficiary, donations=[], openStatus=True):
+        self.__id = id
         self.__title = title
         self.__description = description
         self.__beneficiary = beneficiary
-        self.__donations = {}
-        self.__openStatus = False
+        self.__donations = donations
+        self.__openStatus = openStatus
         self.__dateCreated = date.today()
 
-    def getId(self) -> str:
+    def getId(self):
         return self.__id
     
     def getTitle(self):
@@ -32,7 +32,7 @@ class DonationCampaign:
         return self.__openStatus
 
     def getDateCreated(self):
-        return self.__dateCreated
+        return self.__dateCreated.isoformat()
 
     def getData(self):
         return {
@@ -55,12 +55,16 @@ class DonationCampaign:
     def setId(self, id: str):
         self.__id = id
     
+    def setOpenStatus(self, openStatus: bool):
+        self.__openStatus = openStatus
+    
     def addDonation(self, donor: User, donation: Donation):
         self.__donations[donor.getWalletAddress()] = donation
 
-    def update(self, title: str = None, description: str = None):
+    def update(self, title: str = None, description: str = None, openStatus: bool = None):
         if title is not None:
-            self.__title = title
+            self.setTitle(title)
         if description is not None:
-            self.__description = description
-    
+            self.setDescription(description)
+        if openStatus is not None:
+            self.setOpenStatus(openStatus)    

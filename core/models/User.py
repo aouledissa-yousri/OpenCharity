@@ -7,7 +7,8 @@ class User:
         self.__walletAddress = walletAddress
         self.__username = username
         self.__profilePic = profilePic
-        self.__donations = {}
+        self.__donations = []
+        self.__donationCampaigns = []
 
 
     def getUsername(self):
@@ -21,13 +22,17 @@ class User:
     
     def getDonations(self):
         return self.__donations
+    
+    def getDonationCampaigns(self):
+        return self.__donationCampaigns
 
     def getData(self):
         return {
             "walletAddress": self.getWalletAddress(),
             "username": self.getUsername(),
             "profilePic": self.getProfilePic(),
-            "donations": self.getDonations()
+            "donations": self.getDonations(),
+            "donationCampaigns": self.getDonationCampaigns()
         }
 
 
@@ -41,7 +46,10 @@ class User:
         self.__walletAddress = walletAddress
     
     def addDonation(self, donation: Donation, donationCampaign: DonationCampaign):
-        self.__donations[donationCampaign.getId()] = donation
+        self.__donations.append({
+            "donationCampaignId": donationCampaign.getId(),
+            "donationId": donation.getId()
+        })
 
     
     def update(self, username: str = None, profilePic: str = None, walletAddress: str = None):

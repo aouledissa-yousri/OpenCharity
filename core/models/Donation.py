@@ -4,12 +4,16 @@ from datetime import date
 
 class Donation:
 
-    def __init__(self, donor: User, donationCampaign: DonationCampaign, amount: int):
+    def __init__(self, id, donor: User, donationCampaign: DonationCampaign, amount: int):
+        self.__id = id
         self.__amount = amount
         self.__dateDonated = date.today()
         self.__donationCampaign = donationCampaign
         self.__donor = donor
+
     
+    def getId(self):
+        return self.__id
 
     def getAmount(self):
         return self.__amount

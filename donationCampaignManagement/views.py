@@ -5,19 +5,19 @@ from helpers import RequestHelper
 
 # Create your views here.
 
-@api_view(["GET"])
-def getDonationCampaigns(request):
-    return JsonResponse(DonationCampaignController.getDonationCampaigns())
+@api_view(["GET", "POST"])
+def handleDonationCampaignsRequest(request, walletAddress):
+    if request.method == "GET":
+        return JsonResponse(DonationCampaignController.getDonationCampaigns(), safe=False)
+    elif request.method == "POST":
+        return JsonResponse(DonationCampaignController.createDonationCampaign(RequestHelper.getRequestBody(request)))
 
-@api_view(["POST"])
-def createDonationCampaign(request):
-    return JsonResponse(DonationCampaignController.createDonationCampaign(RequestHelper.getRequestBody(request)))
 
 @api_view(["GET", "PATCH", "DELETE"])
-def donationCampaign(request, id):
+def handleDonationCampaignRequest(request, walletAddress, id):
     if request.method == "GET":
         return JsonResponse(DonationCampaignController.getDonationCampaign(id))
     elif request.method == "PATCH":
         return JsonResponse(DonationCampaignController.updateDonationCampaign(RequestHelper.getRequestBody(request), id))
     elif request.method == "DELETE":
-        return JsonResponse(DonationCampaignController.deleteDonationCampaign(id))
+        return JsonResponse(DonationCampaignController.deleteDonationCampaign(id), safe=False)
