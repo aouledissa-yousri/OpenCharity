@@ -5,8 +5,8 @@ class DonationCampaignIpfsGatewayService:
     
     @staticmethod
     def saveDonationCampaignIpfsRecord(id, cid):
-        donationIpfsGateway = DonationCampaignIpfsGateway(id=id, cid=cid)
-        donationIpfsGateway.save()
+        donationCampaignIpfsRecord = DonationCampaignIpfsGateway(id=id, cid=cid)
+        donationCampaignIpfsRecord.save()
         return True
 
     @staticmethod
@@ -31,7 +31,7 @@ class DonationCampaignIpfsGatewayService:
                 "title": "",
                 "description": "",
                 "beneficiary": "",
-                "donations": "",
+                "donations": {},
                 "openStatus": "",
                 "dateCreated": ""
             }

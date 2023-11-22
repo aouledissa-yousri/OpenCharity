@@ -1,5 +1,5 @@
 from ..services import UserService
-from core.models import DonationCampaign
+from core.models import DonationCampaign, Donation
 
 class UserController:
 
@@ -30,6 +30,10 @@ class UserController:
     @staticmethod
     def updateUserDonationCampaign(walletAddress, donationCampaign: DonationCampaign):
         return UserService.updateUserDonationCampaign(walletAddress, donationCampaign)
+    
+    @staticmethod
+    def addDonationToUser(walletAddress: str, donation: Donation):
+        return UserService.addDonationToUser(walletAddress, donation)
 
     @staticmethod
     def login(data):

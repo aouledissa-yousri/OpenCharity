@@ -1,4 +1,7 @@
-
+from ..services import DonationIpfsGatewayService
 
 class DonationIpfsGatewayController:
-    pass
+
+    @staticmethod
+    def saveDonationIpfsRecord(id: str, cid: str):
+        return DonationIpfsGatewayService.saveDonationIpfsRecord(id, cid)

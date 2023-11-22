@@ -1,4 +1,5 @@
 from ..services import DonationCampaignService
+from core.models import Donation
 
 class DonationCampaignController:
 
@@ -8,7 +9,7 @@ class DonationCampaignController:
         return DonationCampaignService.getDonationCampaigns() 
 
     @staticmethod
-    def getDonationCampaign(id):
+    def getDonationCampaign(id: str):
         return DonationCampaignService.getDonationCampaign(id)
 
     @staticmethod
@@ -16,10 +17,14 @@ class DonationCampaignController:
         return DonationCampaignService.createDonationCampaign(data)
     
     @staticmethod
-    def updateDonationCampaign(data, id):
+    def updateDonationCampaign(data, id: str):
         return DonationCampaignService.updateDonationCampaign(data, id)
 
     @staticmethod
-    def deleteDonationCampaign(id):
+    def deleteDonationCampaign(id: str):
         return DonationCampaignService.deleteDonationCampaign(id)
+
+    @staticmethod
+    def addDonationToCampaign(donation: Donation, id: str):
+        return DonationCampaignService.addDonationToCampaign(donation, id)
 

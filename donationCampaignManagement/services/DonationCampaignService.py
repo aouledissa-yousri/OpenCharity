@@ -1,4 +1,4 @@
-from core.models import DonationCampaign
+from core.models import DonationCampaign, Donation
 from helpers import IpfsHelper, StringHelper
 from ipfsGateway.controllers import DonationCampaignIpfsGatewayController
 from userManagement.controllers import UserController
@@ -56,7 +56,26 @@ class DonationCampaignService:
 
         
         return result
-            
+    
+    @staticmethod
+    def addDonationToCampaign(donation: Donation, id: str):
+        donationCampaignData = DonationCampaignIpfsGatewayController.getDonationCampaignIpfsRecord(id)
+        print(donationCampaignData)
+
+        donationCampaign = DonationCampaign(
+            donationCampaignData["id"],
+            donationCampaignData["title"],
+            donationCampaignData["description"],
+            donationCampaignData["beneficiary"],
+            donationCampaignData["donations"],
+            donationCampaignData["openStatus"]
+        )  
+
+        donationCampaign.addDonation(donation)
+        DonationCampaignIpfsGatewayController.updateDonationCampaignIpfsRecord(id, IpfsHelper.uploadData(donationCampaign.getData())["IpfsHash"])
+        UserController.updateUserDonationCampaign(donationCampaign.getBeneficiary(), donationCampaign)
+
+        return donationCampaign.getData()
 
 
 

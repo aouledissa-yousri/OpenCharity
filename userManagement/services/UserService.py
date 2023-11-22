@@ -1,5 +1,5 @@
-from core.models import User, DonationCampaign
-from helpers import IpfsHelper, DictionaryHelper
+from core.models import User, DonationCampaign, Donation
+from helpers import IpfsHelper
 from ipfsGateway.controllers import UserIpfsGatewayController
 
 class UserService:
@@ -59,7 +59,15 @@ class UserService:
         UserIpfsGatewayController.updateUserIpfsRecord(user.getWalletAddress(), IpfsHelper.uploadData(user.getData())["IpfsHash"])
 
         return user.getData()
+    
+    @staticmethod
+    def addDonationToUser(walletAddress: str, donation: Donation):
+        userData = UserIpfsGatewayController.getUserIpfsData(walletAddress)
+        user = User(userData["walletAddress"], userData["username"], userData["profilePic"], userData["donations"], userData["donationCampaigns"])
+        user.addDonation(donation)
+        UserIpfsGatewayController.updateUserIpfsRecord(user.getWalletAddress(), IpfsHelper.uploadData(user.getData())["IpfsHash"])
 
+        return user.getData()
 
     @staticmethod
     def login(data):

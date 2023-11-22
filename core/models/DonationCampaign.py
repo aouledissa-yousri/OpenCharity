@@ -1,15 +1,14 @@
-from datetime import date, datetime
-import core.models.User as User
+from datetime import date
 import core.models.Donation as Donation
 
 class DonationCampaign: 
 
-    def __init__(self, id, title, description, beneficiary, donations=[], openStatus=True):
+    def __init__(self, id, title, description, beneficiary, donations: dict={}, openStatus=True):
         self.__id = id
         self.__title = title
         self.__description = description
         self.__beneficiary = beneficiary
-        self.__donations = donations
+        self.__donations: dict = donations
         self.__openStatus = openStatus
         self.__dateCreated = date.today()
 
@@ -58,8 +57,8 @@ class DonationCampaign:
     def setOpenStatus(self, openStatus: bool):
         self.__openStatus = openStatus
     
-    def addDonation(self, donor: User, donation: Donation):
-        self.__donations[donor.getWalletAddress()] = donation
+    def addDonation(self, donation: Donation):
+        self.__donations[donation.getId()] = donation.getData()
 
     def update(self, title: str = None, description: str = None, openStatus: bool = None):
         if title is not None:

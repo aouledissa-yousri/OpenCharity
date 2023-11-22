@@ -1,14 +1,13 @@
 import core.models.User as User
-import core.models.DonationCampaign as DonationCampaign
 from datetime import date
 
 class Donation:
 
-    def __init__(self, id, donor: User, donationCampaign: DonationCampaign, amount: int):
+    def __init__(self, id, donor: User, donationCampaignId: str, amount: int):
         self.__id = id
         self.__amount = amount
         self.__dateDonated = date.today()
-        self.__donationCampaign = donationCampaign
+        self.__donationCampaign = donationCampaignId
         self.__donor = donor
 
     
@@ -19,7 +18,7 @@ class Donation:
         return self.__amount
     
     def getDateDonated(self):
-        return self.__dateDonated
+        return self.__dateDonated.isoformat()
     
     def getDonationCampaign(self):
         return self.__donationCampaign

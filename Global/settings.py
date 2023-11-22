@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',
     'userManagement',
     'donationCampaignManagement',
+    'donationManagement',
     'ipfsGateway'
 ]
 

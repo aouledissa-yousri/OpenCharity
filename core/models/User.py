@@ -54,8 +54,8 @@ class User:
     def updateDonationCampaign(self, donationCampaign: DonationCampaign):
         self.__donationCampaigns[donationCampaign.getId()] = donationCampaign.getData()
         
-    def addDonation(self, donation: Donation, donationCampaign: DonationCampaign):
-        self.__donations[donation.getId()] = donationCampaign["id"]
+    def addDonation(self, donation: Donation):
+        self.__donations[donation.getId()] = donation.getData()
 
     
     def update(self, username: str = None, profilePic: str = None, walletAddress: str = None):
