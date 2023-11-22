@@ -5,12 +5,13 @@ from helpers import RequestHelper
 
 # Create your views here.
 
-@api_view(["GET", "POST"])
-def handleDonationCampaignsRequest(request, walletAddress):
-    if request.method == "GET":
-        return JsonResponse(DonationCampaignController.getDonationCampaigns(), safe=False)
-    elif request.method == "POST":
-        return JsonResponse(DonationCampaignController.createDonationCampaign(RequestHelper.getRequestBody(request)))
+@api_view(["POST"])
+def createDonationCampaign(request, walletAddress):
+    return JsonResponse(DonationCampaignController.createDonationCampaign(RequestHelper.getRequestBody(request)))
+
+@api_view(["GET"])
+def getAllDonationCampaigns(request):
+    return JsonResponse(DonationCampaignController.getDonationCampaigns(), safe=False)
 
 
 @api_view(["GET", "PATCH", "DELETE"])

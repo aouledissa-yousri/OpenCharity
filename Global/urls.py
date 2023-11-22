@@ -16,9 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+import donationCampaignManagement.views 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('donationCampaigns/', donationCampaignManagement.views.getAllDonationCampaigns),
     path("users/<str:walletAddress>/donationCampaigns/", include("donationCampaignManagement.urls")),
     path("users/", include("userManagement.urls"))
 ]

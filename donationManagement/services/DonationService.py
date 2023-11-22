@@ -12,7 +12,7 @@ class DonationService:
             StringHelper.generateRandomString(), 
             donationData["donor"], 
             donationData["donationCampaignId"],
-            f"{donationData['amount']}ETH"
+            donationData['amount']
         )
 
         DonationIpfsGatewayController.saveDonationIpfsRecord(
