@@ -1,6 +1,7 @@
 from core.models import DonationCampaign
 from helpers import IpfsHelper, StringHelper
 from ipfsGateway.controllers import DonationCampaignIpfsGatewayController
+from userManagement.controllers import UserController
 
 
 class DonationCampaignService: 
@@ -15,11 +16,13 @@ class DonationCampaignService:
     def createDonationCampaign(data):
         donationCampaign = DonationCampaign(StringHelper.generateRandomString(), data["title"], data["description"], data["beneficiary"])
         DonationCampaignIpfsGatewayController.saveDonationCampaignIpfsRecord(donationCampaign.getId(), IpfsHelper.uploadData(donationCampaign.getData())["IpfsHash"])
+        UserController.addDonationCampaignToUser(data["beneficiary"], donationCampaign)
         return donationCampaign.getData()
 
     
     def updateDonationCampaign(data, id):
         donationCampaignData = DonationCampaignIpfsGatewayController.getDonationCampaignIpfsRecord(id)
+        
         donationCampaign = DonationCampaign(
             donationCampaignData["id"],
             donationCampaignData["title"],
@@ -28,10 +31,35 @@ class DonationCampaignService:
             donationCampaignData["donations"],
             donationCampaignData["openStatus"]
         )
-        donationCampaign.update(data["title"], data["description"], data["openStatus"])
 
+        donationCampaign.update(data["title"], data["description"], data["openStatus"])
         DonationCampaignIpfsGatewayController.updateDonationCampaignIpfsRecord(id, IpfsHelper.uploadData(donationCampaign.getData())["IpfsHash"])
+        UserController.updateUserDonationCampaign(donationCampaign.getBeneficiary(), donationCampaign)
+
         return donationCampaign.getData()
 
     def deleteDonationCampaign(id):
-        return DonationCampaignIpfsGatewayController.deleteDonationCampaignIpfsRecord(id)
+        donationCampaignData = DonationCampaignIpfsGatewayController.getDonationCampaignIpfsRecord(id)
+        result = DonationCampaignIpfsGatewayController.deleteDonationCampaignIpfsRecord(id)
+
+        if(result["code"] == 200):
+            donationCampaign = DonationCampaign(
+                donationCampaignData["id"],
+                donationCampaignData["title"],
+                donationCampaignData["description"],
+                donationCampaignData["beneficiary"],
+                donationCampaignData["donations"],
+                donationCampaignData["openStatus"]
+            )
+
+            UserController.removeDonationCampaignFromUser(donationCampaign.getBeneficiary(), donationCampaign.getId())
+
+        
+        return result
+            
+
+
+
+        
+
+        

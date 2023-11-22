@@ -29,7 +29,8 @@ class UserIpfsGatewayService:
                 "walletAddress": "",
                 "username": "",
                 "profilePic": "",
-                "donations": {}
+                "donations": {},
+                "donationCampaigns": {}
             }
     
     @staticmethod

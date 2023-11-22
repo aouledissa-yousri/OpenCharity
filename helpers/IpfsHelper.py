@@ -17,7 +17,6 @@ class IpfsHelper:
 
     @staticmethod
     def uploadData(data):
-        print(data)
         return json.loads(
             requests.post(
                 IpfsHelper.__URL, 
