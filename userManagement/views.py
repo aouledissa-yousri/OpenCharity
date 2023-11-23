@@ -8,6 +8,7 @@ from helpers import RequestHelper
 @api_view(["GET" ,"PATCH"])
 def user(request, walletAddress: str):
     if request.method == "GET":
+        print("hello")
         return JsonResponse(UserController.getUser(walletAddress))
     else:
         return JsonResponse(UserController.updateUser(walletAddress, RequestHelper.getRequestBody(request)))
@@ -23,7 +24,10 @@ def signUp(request):
     
 @api_view(["POST"])
 def login(request):
-    return JsonResponse({"Message": "Logged in"})
+    result = UserController.login(RequestHelper.getRequestBody(request))
+    return JsonResponse(result, status=result["code"])
 
-
+@api_view(["DELETE"])
+def logout(request):
+    return JsonResponse(UserController.logout(RequestHelper.getRequestBody(request)))
 

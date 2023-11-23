@@ -37,4 +37,10 @@ class UserController:
 
     @staticmethod
     def login(data):
-        pass
+        return UserService.login(data)
+
+    @staticmethod
+    def logout(data):
+        return UserService.logout(data)
+    
+    

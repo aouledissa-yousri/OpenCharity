@@ -1,6 +1,7 @@
 from core.models import User, DonationCampaign, Donation
 from helpers import IpfsHelper
 from ipfsGateway.controllers import UserIpfsGatewayController
+from sessionManagement.controllers import SessionController
 
 class UserService:
 
@@ -71,4 +72,8 @@ class UserService:
 
     @staticmethod
     def login(data):
-        pass
+        return SessionController.addSession(data["walletAddress"])
+    
+    @staticmethod
+    def logout(data):
+        return SessionController.removeSession(data["sessionToken"])
