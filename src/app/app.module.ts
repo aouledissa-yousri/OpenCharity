@@ -11,6 +11,8 @@ import { DonationCampaignComponent } from './components/donation-campaign/donati
 import { SearchComponent } from './components/search/search.component';
 import { CreateDonationComponent } from './components/create-donation/create-donation.component';
 import { DonateComponent } from './components/donate/donate.component';
+import { StoreModule } from '@ngrx/store';
+import { HttpClientModule } from  '@angular/common/http'
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { DonateComponent } from './components/donate/donate.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
