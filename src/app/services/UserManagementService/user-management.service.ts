@@ -22,9 +22,13 @@ export class UserManagementService {
     this.provider = new ethers.BrowserProvider(ethereum)
     this.walletAddress = (await this.provider.send("eth_requestAccounts", []))[0]
 
-    if((await this.getUser(this.walletAddress)).getWalletAddress() != "") this.http.post<any>(`${API_URL}/login/`, LoginPayload.createLoginPayload(this.walletAddress)).subscribe(data => {
+    if((await this.getUser(this.walletAddress)).getWalletAddress() != ""){
+      const data = await firstValueFrom(this.http.post<any>(`${API_URL}/users/login/`, LoginPayload.createLoginPayload(this.walletAddress)))
       localStorage.setItem("token", data.sessionToken)
-    })
+      return true
+    }
+
+    return false
   }
 
   public disconnectWallet(){

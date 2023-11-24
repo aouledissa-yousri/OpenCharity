@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserManagementService } from 'src/app/services/UserManagementService/user-management.service';
-import { UserStateInterface } from 'src/app/states/interfaces/UserStateInterface';
 
 @Component({
   selector: 'app-home',
@@ -19,8 +18,11 @@ export class HomeComponent implements OnInit{
 
   
   public async connectWallet(){
-    if( (window as any).ethereum ) (await this.userManagementService.connectWallet((window as any).ethereum))
-    else console.log("metamask not available")
+    if( (window as any).ethereum ) {
+      console.log(await this.userManagementService.connectWallet((window as any).ethereum))
+
+    }
+    
   }
 
   public async disconnectWallet(){
