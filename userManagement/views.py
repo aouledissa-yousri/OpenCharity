@@ -8,7 +8,6 @@ from helpers import RequestHelper
 @api_view(["GET" ,"PATCH"])
 def user(request, walletAddress: str):
     if request.method == "GET":
-        print("hello")
         return JsonResponse(UserController.getUser(walletAddress))
     else:
         return JsonResponse(UserController.updateUser(walletAddress, RequestHelper.getRequestBody(request)))
