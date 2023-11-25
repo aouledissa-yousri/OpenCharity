@@ -1,12 +1,23 @@
 <mat-toolbar class="navbar">
     <mat-toolbar-row>
 
-        <mat-form-field appearance="outline" class="search">
+        <mat-form-field appearance="outline" class="search" (keyup) = "search($event)">
             <mat-icon class="search-icon">search</mat-icon>&nbsp;
             <input matInput placeholder="Search Accounts, Donation Campaigns ..." >
         </mat-form-field>
 
-      <button mat-button class="navbar-link-text">Home</button>
+        <a mat-button class="navbar-link-text" routerLink="" routerLinkActive="active">Home</a>
+        <button mat-raised-button color="primary" routerLink="login" *ngIf="!isConnected()"><b>Connect Wallet</b></button>
+        
+        <div style="display: flex" *ngIf="isConnected()">
+            <mat-icon class="navbar-link-text" matRipple>notifications</mat-icon> &nbsp;
+
+            <div class="navbar-link-text" matRipple>
+                <mat-icon>account_circle</mat-icon>
+                <span>0.000ETH</span>
+            </div>
+        </div>
+
 
 
     </mat-toolbar-row>

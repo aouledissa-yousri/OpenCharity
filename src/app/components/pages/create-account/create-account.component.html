@@ -1,1 +1,35 @@
-<p>create-account works!</p>
+
+<div class="box">
+    
+    <mat-card class="card">
+        <mat-card-header class="card-header">
+            <h1 >Create New Account</h1>
+        </mat-card-header>
+        <mat-card-content>
+            
+            <form [formGroup] = "signUpForm" class = "form">
+
+
+                <div class="container">
+                    <img [src]="defaultImage" alt="Avatar" class="image" (click) = "display.click()">
+                    <input type="file" formControlName="image" hidden #display (change) = "displayImage($event)" accept="image/*"/>
+                    <div class="overlay" (click) = "display.click()">
+                      <div class="text">Upload image</div>
+                    </div>
+                </div>
+
+                <mat-form-field appearance="outline" class="username">
+                    <mat-label>Username</mat-label>
+                    <input matInput formControlName="username">
+                </mat-form-field>
+
+                
+            </form>
+
+
+            <button mat-raised-button outline color="primary" (click) = "createAccount()" [disabled] = "!isValid()"><b>Create Account</b></button> &nbsp;
+            <button mat-raised-button outline style="background-color: rgb(255, 54, 54); color: white" (click)="reset()"><b>Reset</b></button>
+
+        </mat-card-content>
+    </mat-card>
+</div>

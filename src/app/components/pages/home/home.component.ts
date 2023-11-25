@@ -19,14 +19,14 @@ export class HomeComponent implements OnInit{
   
   public async connectWallet(){
     if( (window as any).ethereum ) {
-      console.log(await this.userManagementService.connectWallet((window as any).ethereum))
+      console.log(await this.userManagementService.login((window as any).ethereum))
 
     }
     
   }
 
   public async disconnectWallet(){
-    this.userManagementService.disconnectWallet()
+    this.userManagementService.logout()
   }
 
 
