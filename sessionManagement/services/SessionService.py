@@ -6,22 +6,29 @@ from ipfsGateway.controllers import UserIpfsGatewayController
 class SessionService: 
 
     @staticmethod
-    def addSession(walletAddress: str): 
-        userIpfsRecord = UserIpfsGatewayController.getUserIpfsData(walletAddress)
+    def addSession(walletAddress: str, signature: str): 
+        try:
+            userIpfsRecord = UserIpfsGatewayController.getUserIpfsData(walletAddress)
 
-        if userIpfsRecord["walletAddress"] == "":
-            return {
-                "code": 404,
-                "message": "user not found"
-            }
+            if userIpfsRecord["walletAddress"] == "":
+                return {
+                    "code": 404,
+                    "message": "user not found"
+                }
+            
+            else:
+                session = Session(walletAddress = walletAddress, sessionToken=signature)
+                session.save()
+                return {
+                    "code": 200,
+                    "message": "connected",
+                    "sessionToken": session.sessionToken
+                }
         
-        else:
-            session = Session(walletAddress = walletAddress, sessionToken=StringHelper.generateRandomString())
-            session.save()
-            return {
-                "code": 200,
-                "message": "connected",
-                "sessionToken": session.sessionToken
+        except KeyError:
+           return {
+                "code": 401,
+                "message": "authentication failed"
             }
 
     

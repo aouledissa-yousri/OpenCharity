@@ -72,7 +72,8 @@ class UserService:
 
     @staticmethod
     def login(data):
-        return SessionController.addSession(data["walletAddress"])
+        return SessionController.addSession(data["walletAddress"], data["signature"])
+            
     
     @staticmethod
     def logout(data):
