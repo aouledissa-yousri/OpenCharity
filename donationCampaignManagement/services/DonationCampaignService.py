@@ -14,7 +14,7 @@ class DonationCampaignService:
     
 
     def createDonationCampaign(data):
-        donationCampaign = DonationCampaign(StringHelper.generateRandomString(), data["title"], data["description"], data["beneficiary"])
+        donationCampaign = DonationCampaign(StringHelper.generateRandomString(), data["title"], data["description"], data["wallpaper"], data["beneficiary"])
         DonationCampaignIpfsGatewayController.saveDonationCampaignIpfsRecord(donationCampaign.getId(), IpfsHelper.uploadData(donationCampaign.getData())["IpfsHash"])
         UserController.addDonationCampaignToUser(data["beneficiary"], donationCampaign)
         return donationCampaign.getData()
@@ -27,6 +27,7 @@ class DonationCampaignService:
             donationCampaignData["id"],
             donationCampaignData["title"],
             donationCampaignData["description"],
+            donationCampaignData["wallpaper"],
             donationCampaignData["beneficiary"],
             donationCampaignData["donations"],
             donationCampaignData["openStatus"]
@@ -47,6 +48,7 @@ class DonationCampaignService:
                 donationCampaignData["id"],
                 donationCampaignData["title"],
                 donationCampaignData["description"],
+                donationCampaignData["wallpaper"],
                 donationCampaignData["beneficiary"],
                 donationCampaignData["donations"],
                 donationCampaignData["openStatus"]
@@ -66,6 +68,7 @@ class DonationCampaignService:
             donationCampaignData["id"],
             donationCampaignData["title"],
             donationCampaignData["description"],
+            donationCampaignData["wallpaper"],
             donationCampaignData["beneficiary"],
             donationCampaignData["donations"],
             donationCampaignData["openStatus"]

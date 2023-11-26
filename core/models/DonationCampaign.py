@@ -3,10 +3,11 @@ import core.models.Donation as Donation
 
 class DonationCampaign: 
 
-    def __init__(self, id, title, description, beneficiary, donations: dict={}, openStatus=True):
+    def __init__(self, id, title, description, wallpaper, beneficiary, donations: dict={}, openStatus=True):
         self.__id = id
         self.__title = title
         self.__description = description
+        self.__wallpaper = wallpaper
         self.__beneficiary = beneficiary
         self.__donations: dict = donations
         self.__openStatus = openStatus
@@ -20,6 +21,9 @@ class DonationCampaign:
 
     def getDescription(self):
         return self.__description
+    
+    def getWallpaper(self):
+        return self.__wallpaper
     
     def getBeneficiary(self):
         return self.__beneficiary
@@ -39,6 +43,7 @@ class DonationCampaign:
             "title": self.getTitle(),
             "description": self.getDescription(),
             "beneficiary": self.getBeneficiary(),
+            "wallpaper": self.getWallpaper(),
             "donations": self.getDonations(),
             "openStatus": self.getOpenStatus(),
             "dateCreated": self.getDateCreated()
