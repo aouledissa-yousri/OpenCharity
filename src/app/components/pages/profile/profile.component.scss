@@ -1,0 +1,44 @@
+.box {
+    padding-top: 9rem
+}
+
+.image {
+    border-radius: 50%;
+    border: 1px solid black;
+    height: 150px;
+    width: 150px;
+    margin-left: 45%;
+}
+
+.username {
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+}
+
+.user-data {
+    margin-left: 35%;
+}
+
+.edit {
+    cursor: pointer !important;
+}
+
+.card {
+    width: 50%;
+    margin-left: 5%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.description {
+    position: relative;
+    overflow: hidden;
+    line-height: 1.5rem; /* Adjust line height based on your font size */
+    max-height: 4.5rem; /* Adjust max-height based on your line height and desired number of lines */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card:hover {
+    transform: scale(1.2);
+}

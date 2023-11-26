@@ -1,10 +1,80 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
+import { User } from 'src/app/models/User';
+import { UserManagementService } from '../../../services/UserManagementService/user-management.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { WalletService } from 'src/app/services/WalletService/wallet.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { FormDialogComponent } from '../../dialogs/form-dialog/form-dialog.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit, DoCheck{
+
+  user: User = new User("", "", "", {}, {})
+
+
+
+  constructor(
+    private userManagementService: UserManagementService,
+    private walletService : WalletService,
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private router: Router
+  ){}
+
+
+  ngOnInit(): void {
+    this.getUserData()
+  }
+
+  ngDoCheck(): void {
+    //this.getUserData()
+  }
+
+  private async getUserData(){
+    this.activatedRoute.paramMap.subscribe(parameters => {
+      const walletAddress = (parameters as any).params.walletAddress
+      this.userManagementService.getUser(walletAddress).then(data => {
+        this.user = data 
+        if(this.user.getWalletAddress() === "") this.router.navigate(["**"])
+      })
+    })
+  }
+
+  public async getBalance(){
+  
+  }
+
+  public getWalletAddress(){
+    return this.walletService.getWalletAddress()
+  }
+
+  public isCurrentUser(){
+    return this.walletService.getWalletAddress() === this.user.getWalletAddress()
+  }
+
+
+  public openUpdateUserDialog(){
+    this.dialog.open(FormDialogComponent, {
+      data: {
+        username: this.user.getUsername(),
+        profilePic: this.user.getProfilePic()
+      }
+      
+    })
+  }
+
+  public getDonationCampaigns(){
+    return this.user.getDonationCampaigns()
+  }
+
+  public checkDonationCampaign(id: string){
+    this.router.navigate(["donation_campaign", id])
+  }
+
+  
 
 }

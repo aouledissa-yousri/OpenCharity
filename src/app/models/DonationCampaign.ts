@@ -8,7 +8,7 @@ export class DonationCampaign {
     constructor(
         private id: string,
         private title: string,
-        //private wallpaper: string
+        private wallpaper: string,
         private description: string,
         private beneficiary: string,
         private donations: DonationMapType,
@@ -24,9 +24,9 @@ export class DonationCampaign {
         return this.title
     }
 
-    /*public getWallpaper(){
+    public getWallpaper(){
         return this.wallpaper
-    }*/
+    }
 
     public getDescription(){
         return this.description

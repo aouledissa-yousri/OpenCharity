@@ -62,7 +62,7 @@ export class CreateAccountComponent implements OnInit{
       profilePic: await IpfsHelper.uploadFile(this.image)
     })
 
-    if(this.walletService.getWalletAddress() === "") this.walletService.connectWallet((window as any).ethereum)
+    if(this.walletService.getWalletAddress() === null) this.walletService.connectWallet((window as any).ethereum)
     this.userManagementService.createAccount(this.signUpForm.value.username, this.signUpForm.value.profilePic)
 
   }

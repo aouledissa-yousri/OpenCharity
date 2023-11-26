@@ -12,6 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from "@angular/material/grid-list"
+
 
 
 
@@ -29,7 +33,9 @@ import { NotificationsComponent } from './components/pages/notifications/notific
 import { CreateAccountComponent } from './components/pages/create-account/create-account.component';
 import { DonationsComponent } from './components/pages/donations/donations.component';
 import { NavbarComponent } from './components/base/navbar/navbar.component';
-import { LoginComponent } from './components/pages/login/login.component'
+import { LoginComponent } from './components/pages/login/login.component';
+import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
+import { FormDialogComponent } from './components/dialogs/form-dialog/form-dialog.component';
 
 
 @NgModule({
@@ -45,7 +51,9 @@ import { LoginComponent } from './components/pages/login/login.component'
     CreateDonationCampaignComponent,
     DonationsComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    PageNotFoundComponent,
+    FormDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +67,9 @@ import { LoginComponent } from './components/pages/login/login.component'
     MatCardModule,
     MatListModule,
     MatRippleModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatGridListModule,
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({}, {})

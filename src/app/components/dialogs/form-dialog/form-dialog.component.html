@@ -1,0 +1,24 @@
+
+<div class="dialog">
+    <h1 style="text-align: center;">Update User</h1>
+    <form [formGroup] = "form">
+        <div class="container">
+            <img [src]="defaultImage" alt="Avatar" class="image" (click) = "display.click()">
+            <input type="file" formControlName="image" hidden #display (change) = "displayImage($event)" accept="image/*"/>
+            <div class="overlay" (click) = "display.click()">
+                <div class="text">Upload image</div>
+            </div>
+        </div>
+    
+        <mat-form-field appearance="outline" class="username">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username">
+        </mat-form-field>
+    </form>
+
+
+    <div>
+        <button mat-raised-button outline color="primary" (click) = "updateAccount()" [disabled] = "!isValid()"><b>Update Account</b></button> &nbsp;
+        <button mat-raised-button outline style="background-color: rgb(255, 54, 54); color: white" (click)="reset()"><b>Reset</b></button>
+    </div>
+</div>

@@ -7,14 +7,14 @@ import { User } from 'src/app/models/User';
 import { LoginPayload } from 'src/app/payloads/LoginPayload';
 import { SignUpPayload } from 'src/app/payloads/SignUpPayload';
 import { WalletService } from '../WalletService/wallet.service';
+import { UpdateUserPayload } from 'src/app/payloads/UpdateUserPayload';
+import { LogoutPayload } from 'src/app/payloads/LogoutPayload';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserManagementService {
 
-  private connected: boolean = false
-  private userData: User = new User("", "", "", {}, {})
 
   constructor(
     private http: HttpClient,
@@ -24,30 +24,41 @@ export class UserManagementService {
   public async login(ethereum: ethers.Eip1193Provider){
 
     await this.walletService.connectWallet(ethereum)
-    console.log(this.walletService.getWalletAddress())
-    
+    const user = await this.getUser(this.walletService.getWalletAddress())
 
-    if((await this.getUser(this.walletService.getWalletAddress())).getWalletAddress() != ""){
-      const data = await firstValueFrom(this.http.post<any>(`${API_URL}/users/login/`, LoginPayload.createLoginPayload(
+    if(user.getWalletAddress() !== ""){
+      await this.walletService.sign()
+
+      await firstValueFrom(this.http.post<any>(`${API_URL}/users/login/`, LoginPayload.createLoginPayload(
         this.walletService.getWalletAddress(),
         this.walletService.getSignature() as string
       )))
 
-      this.walletService.sign()
-      this.connected = true
+      localStorage.setItem("userData", JSON.stringify(user))
+
+      return true
     }
 
-    return this.connected
+    return false
   }
 
-  public logout(){
-    this.connected = false
+  public async logout(){
+    const data = await firstValueFrom(this.http.delete(
+      `${API_URL}/users/logout/`,
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: LogoutPayload.createLogoutPayload(this.walletService.getSignature() as string)
+      }
+    ))
     this.walletService.disconnectWallet()
+
   }
 
   public async createAccount(username: string, profilePic: string){
     const data =  await firstValueFrom(this.http.post(`${API_URL}/users/signUp/`, SignUpPayload.createSignUpPayload(this.walletService.getWalletAddress(), username, profilePic)))
-    console.log(data)
+    return data
   }
 
   public async getUser(walletAddress: string){
@@ -64,7 +75,18 @@ export class UserManagementService {
 
 
   public isConnected(){
-    return this.connected
+    return this.walletService.isConnected()
+  }
+
+
+  public async updateAccount(username: string, profilePic: string){
+    const data = await firstValueFrom(this.http.patch(
+      `${API_URL}/users/${this.walletService.getWalletAddress()}/`, 
+      UpdateUserPayload.createUpdateUserPayload(this.walletService.getWalletAddress(), username, profilePic)
+    ))
+
+    localStorage.setItem("userData", JSON.stringify(data))
+
   }
 
 }

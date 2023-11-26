@@ -6,16 +6,46 @@
             <input matInput placeholder="Search Accounts, Donation Campaigns ..." >
         </mat-form-field>
 
-        <a mat-button class="navbar-link-text" routerLink="" routerLinkActive="active">Home</a>
+        <a matRipple class="navbar-link-text" routerLink="home" routerLinkActive="active">Home</a>
         <button mat-raised-button color="primary" routerLink="login" *ngIf="!isConnected()"><b>Connect Wallet</b></button>
         
         <div style="display: flex" *ngIf="isConnected()">
-            <mat-icon class="navbar-link-text" matRipple>notifications</mat-icon> &nbsp;
+            <mat-icon class="navbar-link-text notification" matRipple routerLink="notifications" routerLinkActive="active">notifications</mat-icon> &nbsp;
 
-            <div class="navbar-link-text" matRipple>
-                <mat-icon>account_circle</mat-icon>
-                <span>0.000ETH</span>
+            <div class="navbar-link-text" 
+                 matRipple [matMenuTriggerFor]="menu" 
+                 #menuTrigger="matMenuTrigger" 
+                 (mouseover) = "menuTrigger.openMenu()"
+                 style="display: flex;"
+            >
+                <img [src] = "getProfilePic()" class="image">&nbsp;
+                <span class="username">{{getUsername()}}</span>
             </div>
+
+            <div class="menu">
+                <mat-menu #menu="matMenu"  >
+                    <button mat-menu-item (click)="checkProfile()">
+                        <mat-icon> person</mat-icon>
+                        <b>Profile</b>
+                    </button>
+                    <mat-divider></mat-divider>
+    
+                    <button mat-menu-item routerLink="create_donation_campaign">
+                        <mat-icon>edit</mat-icon>
+                        <b>Create donation campaign</b>
+                    </button>
+                    <mat-divider></mat-divider>
+    
+                    <button mat-menu-item (click)="disconnectWallet()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <b>Logout</b>
+                    </button>
+                    
+                </mat-menu>
+            </div>
+
+            
+
         </div>
 
 

@@ -3,6 +3,7 @@
     color: white;
     padding: 20px;
     position: fixed;
+    z-index: 1;
 }
 
 .search{
@@ -15,11 +16,32 @@
 }
 
 .navbar-link-text{
-    font-size: 125%;
+    font-size: 25px;
     margin-right: 2rem;
+    text-decoration: none;
+    color: white;
+    margin-top: 10px;
     cursor: pointer !important;
 }
 
 .active {
-    color: blue
+    color: #007bff
+}
+
+.notification {
+    margin-top: 20px;
+}
+
+.username {
+    margin-top: 10px
+}
+
+.image {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.menu {
+    z-index: 2;
 }

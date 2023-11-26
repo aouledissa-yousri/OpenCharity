@@ -1,35 +1,40 @@
+.dialog{
+    height: 20rem;
+    width: 20rem;
+    padding: 50px
+}
+
 .box {
-    padding-top: 6rem;
-    margin-left: 5%;
+    padding-top: 6rem
 }
 
 .card{
     width: 50%;
     margin: 0 auto;
-    margin-top: 2%;
+    margin-top: 10%;
 }
 
 .card-header{
-    margin-left: 31%;
+    margin-left: 35%;
 }
 
 .form {
     margin-left: 0%;
 }
 
-.title {
+.username {
     width: 100%
 }
 
 .image{
-    border-radius: 5px;
+    border-radius: 50%;
     border: 1px solid gray;
     cursor: pointer;
     position: absolute;
-    top: 10%;
-    left: 17%;
-    height: 50%;
-    width: 60%;
+    top: 19%;
+    left: 30%;
+    height: 40%;
+    width: 40%;
 }
 
 
@@ -40,13 +45,13 @@
 
 .overlay {
     position: absolute;
-    top: 10%;
-    left: 17%;
-    height: 50%;
-    width: 60%;
+    top: 20%;
+    left: 30%;
+    height: 40%;
+    width: 40%;
     opacity: 0;
     transition: .5s ease;
-    border-radius: 5px;
+    border-radius: 50%;
     background-color: #252525;
     cursor: pointer;
 }
@@ -70,5 +75,4 @@
     width: 192px;
     margin-left: 36.5%;
     border-radius: 50%;
-    margin-bottom: 20%;
 }
