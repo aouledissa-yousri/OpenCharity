@@ -3,11 +3,11 @@ pragma solidity ^0.8.0;
 
 contract DonationContract {
 
-    function donateEther(address payable beneficiary, uint256 amount) public payable returns(bool) {
+    constructor() public {}
+
+    function donateEther(address payable beneficiary, uint256 amount) external payable {
         require(address(this).balance >= amount, "Insufficient funds");
 
-        (bool success,) = beneficiary.call{value: amount}("");
-        require(success, "Transfer failed");
-        return success;
+        beneficiary.transfer(amount);
     }
 }
