@@ -21,6 +21,7 @@ import donationCampaignManagement.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('donationCampaigns/', donationCampaignManagement.views.getAllDonationCampaigns),
+    path('donationCampaigns/<str:id>', donationCampaignManagement.views.getDonationCampaign),
     path("users/<str:walletAddress>/donationCampaigns/", include("donationCampaignManagement.urls")),
     path("users/", include("userManagement.urls"))
 ]

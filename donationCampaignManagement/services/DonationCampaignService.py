@@ -33,7 +33,7 @@ class DonationCampaignService:
             donationCampaignData["openStatus"]
         )
 
-        donationCampaign.update(data["title"], data["description"], data["openStatus"])
+        donationCampaign.update(data["title"], data["description"], data["openStatus"], data["wallpaper"])
         DonationCampaignIpfsGatewayController.updateDonationCampaignIpfsRecord(id, IpfsHelper.uploadData(donationCampaign.getData())["IpfsHash"])
         UserController.updateUserDonationCampaign(donationCampaign.getBeneficiary(), donationCampaign)
 

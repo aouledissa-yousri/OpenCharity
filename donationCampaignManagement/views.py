@@ -21,5 +21,9 @@ def handleDonationCampaignRequest(request, walletAddress, id):
     elif request.method == "PATCH":
         return JsonResponse(DonationCampaignController.updateDonationCampaign(RequestHelper.getRequestBody(request), id))
     elif request.method == "DELETE":
-        print("hello world")
         return JsonResponse(DonationCampaignController.deleteDonationCampaign(id), safe=False)
+
+
+@api_view(["GET"])
+def getDonationCampaign(request, id):
+    return JsonResponse(DonationCampaignController.getDonationCampaign(id))

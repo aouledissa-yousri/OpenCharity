@@ -62,13 +62,18 @@ class DonationCampaign:
     def setOpenStatus(self, openStatus: bool):
         self.__openStatus = openStatus
     
+    def setWallpaper(self, wallpaper: str):
+        self.__wallpaper = wallpaper
+    
     def addDonation(self, donation: Donation):
         self.__donations[donation.getId()] = donation.getData()
 
-    def update(self, title: str = None, description: str = None, openStatus: bool = None):
+    def update(self, title: str = None, description: str = None, openStatus: bool = None, wallpaper: str = None):
         if title is not None:
             self.setTitle(title)
         if description is not None:
             self.setDescription(description)
         if openStatus is not None:
             self.setOpenStatus(openStatus)    
+        if wallpaper is not None:
+            self.setWallpaper(wallpaper)
