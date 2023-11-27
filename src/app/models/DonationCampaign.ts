@@ -20,7 +20,7 @@ export class DonationCampaign {
         return this.id
     }
 
-    public getTtitle(){
+    public getTitle(){
         return this.title
     }
 
@@ -56,12 +56,23 @@ export class DonationCampaign {
         this.description = description
     }
 
+    public setWallpaper(wallpaper: string){
+        this.wallpaper = wallpaper
+    }
+
     public addDonation(donation: Donation){
         this.donations[donation.getId()] = donation
     }
 
     public setOpenStatus(openStatus: boolean){
         this.openStatus = openStatus
+    }
+
+    public update(title?: string, description?: string, wallpaper?: string, openStatus?: boolean){
+        if(title !== undefined) this.setTitle(title)
+        if(description !== undefined) this.setDescription(description)
+        if(wallpaper !== undefined) this.setWallpaper(wallpaper)
+        if(openStatus !== undefined) this.setOpenStatus(openStatus)
     }
 
 }

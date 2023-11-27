@@ -1,1 +1,57 @@
-<p>donation-campaign works!</p>
+<div class="box">
+    <img [src]="donationCampaignData.getWallpaper()" class="image">
+
+    <div class="info">
+        <div>
+            <span>
+                <mat-icon>date_range</mat-icon>
+                {{reformatDate(donationCampaignData.getDateCreated())}}
+            </span>  
+        </div> <br> <br> <br> <br>
+
+        <div>
+            <span style="font-size: 90px;">{{donationCampaignData.getTitle()}}</span> &nbsp; &nbsp;
+            <span>
+                <button mat-icon-button (click) = "openUpdateDonationCampaignDialog()" *ngIf="isBeneficiary()"><mat-icon>edit</mat-icon></button>
+                <button mat-icon-button (click) = "openDeleteDonationCampaignDialog()" *ngIf="isBeneficiary()"><mat-icon>delete</mat-icon></button>
+            </span>
+        </div><br> <br> <br> <br>
+
+        <p class="description">
+            {{donationCampaignData.getDescription()}}
+            
+        </p>
+
+        <button mat-raised-button outline color="primary" class="donate" (click)="openDonationDialog()">Donate</button><br><br><br>
+
+
+        <h1>Donations</h1>
+
+        <div class="donations">
+            <p-table 
+                [value]="getDonations()" [paginator]="true"
+                [rows]="5"
+                [rowsPerPageOptions]="[5, 10, 25]"
+            >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Date</th>
+                        <th>Amount(ETH)</th>
+                        <th>Donor</th>
+                    </tr>
+                </ng-template>
+
+                <!--<ng-template pTemplate="body" let-donation>
+                    <tr>
+                        <td>{{ reformatDate(donation.getDateDonated()) }}</td>
+                        <td>{{ donation.getAmount() }}</td>
+                        <td><a style="color: rgb(79, 79, 236); cursor: pointer;">{{ donation.getDonor() }}</a></td>
+                    </tr>
+                </ng-template>-->
+
+            </p-table>
+        </div>
+
+
+    </div>
+</div>

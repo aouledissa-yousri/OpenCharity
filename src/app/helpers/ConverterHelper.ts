@@ -1,9 +1,13 @@
+import { ethers } from "ethers";
 
 
 export class ConverterHelper {
 
-    public static convertBigIntToNumber(num: bigint): number {
-        console.log(num)
-        return Number(num);
+    public static convertWeiToEth(num: bigint): number {
+        return parseFloat(ethers.formatEther(num))
+    }
+
+    public static convertEthToWei(num: number): bigint {
+        return ethers.parseEther(num.toString())
     }
 }

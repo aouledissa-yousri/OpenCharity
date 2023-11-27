@@ -12,6 +12,7 @@ import { unAuthGuard } from './guards/UnAuthGuard/un-auth.guard';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { DonationCampaignComponent } from './components/pages/donation-campaign/donation-campaign.component';
 
+
 const routes: Routes = [
   { path: "home", component: HomeComponent},
   { path: "search", component: SearchComponent},
@@ -21,8 +22,8 @@ const routes: Routes = [
   { path: "notifications", component: NotificationsComponent, canActivate: [authGuard]},
   { path: "profile/:walletAddress", component: ProfileComponent},
   { path: "donation_campaign/:id", component: DonationCampaignComponent},
-  { path: "**", component: PageNotFoundComponent},
-  { path: "", redirectTo: "home", pathMatch: 'full' }
+  { path: "", redirectTo: "home", pathMatch: 'full' },
+  { path: "**", component: PageNotFoundComponent}
 ];
 
 @NgModule({

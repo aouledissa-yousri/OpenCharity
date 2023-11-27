@@ -14,6 +14,7 @@ import { FormDialogComponent } from '../../dialogs/form-dialog/form-dialog.compo
 export class ProfileComponent implements OnInit, DoCheck{
 
   user: User = new User("", "", "", {}, {})
+  balance: number = 0
 
 
 
@@ -27,7 +28,7 @@ export class ProfileComponent implements OnInit, DoCheck{
 
 
   ngOnInit(): void {
-    this.getUserData()
+    this.getUserData().then(data => this.getBalance())
   }
 
   ngDoCheck(): void {
@@ -45,11 +46,11 @@ export class ProfileComponent implements OnInit, DoCheck{
   }
 
   public async getBalance(){
-  
+    this.balance = await this.walletService.getBalance(this.walletService.getWalletAddress())
   }
 
   public getWalletAddress(){
-    return this.walletService.getWalletAddress()
+    return this.user.getWalletAddress()
   }
 
   public isCurrentUser(){
@@ -72,7 +73,7 @@ export class ProfileComponent implements OnInit, DoCheck{
   }
 
   public checkDonationCampaign(id: string){
-    this.router.navigate(["donation_campaign", id])
+    this.router.navigateByUrl(`donation_campaign/${id}`, {state: this.user.getDonationCampaign(id)})
   }
 
   

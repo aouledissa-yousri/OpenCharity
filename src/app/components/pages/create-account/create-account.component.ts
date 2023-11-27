@@ -5,6 +5,9 @@ import { UserManagementService } from 'src/app/services/UserManagementService/us
 import { IpfsHelper } from "../../../helpers/IpfsHelper"
 import { FileHelper } from 'src/app/helpers/FileHelper';
 import { WalletService } from 'src/app/services/WalletService/wallet.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LoadingDialogComponent } from '../../dialogs/loading-dialog/loading-dialog.component';
+import { ResultDialogComponent } from '../../dialogs/result-dialog/result-dialog.component';
 
 @Component({
   selector: 'app-create-account',
@@ -20,12 +23,12 @@ export class CreateAccountComponent implements OnInit{
   constructor(
     private userManagementService: UserManagementService,
     private walletService: WalletService,
-    private router: Router,
+    private dialog: MatDialog,
     private formBuilder: FormBuilder
   ){}
 
   ngOnInit(): void {
-      this.initForm()
+    this.initForm()
   }
 
   public initForm(){
@@ -58,12 +61,24 @@ export class CreateAccountComponent implements OnInit{
 
 
   public async createAccount(){
+    let dialogRef: any = this.dialog.open(LoadingDialogComponent, {data: "Creating Account..."})
+
     this.signUpForm.patchValue({
       profilePic: await IpfsHelper.uploadFile(this.image)
     })
 
+
     if(this.walletService.getWalletAddress() === null) this.walletService.connectWallet((window as any).ethereum)
-    this.userManagementService.createAccount(this.signUpForm.value.username, this.signUpForm.value.profilePic)
+    await this.userManagementService.createAccount(this.signUpForm.value.username, this.signUpForm.value.profilePic)
+
+    dialogRef.close()
+    this.reset()
+
+    dialogRef = this.dialog.open(ResultDialogComponent, {data: {
+      title: "Account Has Been Created!!",
+      description: "Congratulations! Your account has been successfully created. You can now access all the features and benefits of our platform."
+    }})
+
 
   }
 

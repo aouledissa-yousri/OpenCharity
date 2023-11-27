@@ -14,7 +14,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatGridListModule } from "@angular/material/grid-list"
+import { MatGridListModule } from "@angular/material/grid-list";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Table, TableModule } from 'primeng/table';
+
 
 
 
@@ -36,6 +39,11 @@ import { NavbarComponent } from './components/base/navbar/navbar.component';
 import { LoginComponent } from './components/pages/login/login.component';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { FormDialogComponent } from './components/dialogs/form-dialog/form-dialog.component';
+import { UpdateDonationCampaignFormDialogComponent } from './components/dialogs/update-donation-campaign-form-dialog/update-donation-campaign-form-dialog.component';
+import { DeleteDonationCampaignConfirmationDialogComponentComponent } from './components/dialogs/delete-donation-campaign-confirmation-dialog-component/delete-donation-campaign-confirmation-dialog-component.component';
+import { DonationDialogFormComponentComponent } from './components/dialogs/donation-dialog-form-component/donation-dialog-form-component.component';
+import { LoadingDialogComponent } from './components/dialogs/loading-dialog/loading-dialog.component';
+import { ResultDialogComponent } from './components/dialogs/result-dialog/result-dialog.component';
 
 
 @NgModule({
@@ -54,6 +62,11 @@ import { FormDialogComponent } from './components/dialogs/form-dialog/form-dialo
     LoginComponent,
     PageNotFoundComponent,
     FormDialogComponent,
+    UpdateDonationCampaignFormDialogComponent,
+    DeleteDonationCampaignConfirmationDialogComponentComponent,
+    DonationDialogFormComponentComponent,
+    LoadingDialogComponent,
+    ResultDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +83,8 @@ import { FormDialogComponent } from './components/dialogs/form-dialog/form-dialo
     MatMenuModule,
     MatDialogModule,
     MatGridListModule,
+    MatProgressSpinnerModule,
+    TableModule,
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({}, {})

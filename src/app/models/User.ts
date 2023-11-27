@@ -31,6 +31,10 @@ export class User {
         return this.donations
     }
 
+    public getDonationCampaign(id: string){
+        return this.donationCampaigns[id]
+    }
+
     public getDonationCampaigns(){
         return this.donationCampaigns
     }

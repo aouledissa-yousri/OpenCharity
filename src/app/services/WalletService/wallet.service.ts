@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ethers } from 'ethers';
+import { BalanceContractHandler } from 'src/app/blockchain-gateway/contract-handlers/BalanceContractHandler';
 import { ConverterHelper } from 'src/app/helpers/ConverterHelper';
 
 @Injectable({
@@ -8,7 +9,6 @@ import { ConverterHelper } from 'src/app/helpers/ConverterHelper';
 export class WalletService {
 
   private walletAddress: string = ""
-  private balance: number = 0
   private provider: ethers.BrowserProvider | undefined
   private signer: ethers.JsonRpcSigner | undefined
   private signature: string | undefined = ""
@@ -25,11 +25,12 @@ export class WalletService {
     return localStorage.getItem("signature") as string
   }
 
-  public async getBalance(ethereum: ethers.Eip1193Provider){
-    if(this.provider === undefined) this.initProvider(ethereum)
-    console.log("hello")
-    return await this.provider?.getBalance(this.getWalletAddress())
-    //console.log(await this.provider?.getBalance(this.getWalletAddress()))
+  public async getBalance(walletAddress: string){
+    return await BalanceContractHandler.getBalance(walletAddress)
+  }
+
+  public isConnected(){
+    return this.getSignature() !== null
   }
 
   public async initProvider(ethereum: ethers.Eip1193Provider){
@@ -56,9 +57,8 @@ export class WalletService {
     this.signer = undefined
 
     localStorage.removeItem("signature")
+    localStorage.removeItem("walletAddress")
   }
 
-  public isConnected(){
-    return this.getSignature() !== null
-  }
+  
 }

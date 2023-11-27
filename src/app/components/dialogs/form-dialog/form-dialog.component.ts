@@ -7,6 +7,8 @@ import { UserManagementService } from 'src/app/services/UserManagementService/us
 import { WalletService } from 'src/app/services/WalletService/wallet.service';
 import { User } from 'src/app/models/User';
 import { ProfileComponent } from '../../pages/profile/profile.component';
+import { LoadingDialogComponent } from '../loading-dialog/loading-dialog.component';
+import { ResultDialogComponent } from '../result-dialog/result-dialog.component';
 
 interface FormDialogData {
   username: string,
@@ -30,6 +32,7 @@ export class FormDialogComponent implements OnInit{
     private userManagementService: UserManagementService,
     private walletService: WalletService,
     private formBuilder: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -66,6 +69,8 @@ export class FormDialogComponent implements OnInit{
 
 
   public async updateAccount(){
+    let dialogRef: any = this.dialog.open(LoadingDialogComponent, {data: "Updating Account..."})
+
     this.form.patchValue({
       profilePic: await IpfsHelper.uploadFile(this.image)
     })
@@ -73,6 +78,14 @@ export class FormDialogComponent implements OnInit{
     if(this.walletService.getWalletAddress() === null) this.walletService.connectWallet((window as any).ethereum)
     await this.userManagementService.updateAccount(this.form.value.username, this.form.value.profilePic)
     this.closeDialog()
+    
+    dialogRef.close()
+
+    dialogRef = this.dialog.open(ResultDialogComponent, {data: {
+      title: "Account Has Been Updated!!",
+      description: "Your account information has been successfully updated."
+    }})
+    
   }
 
   public closeDialog(){
