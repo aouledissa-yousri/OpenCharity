@@ -1,4 +1,61 @@
 
 <div class="box">
-    <h1>Search</h1>
+    
+
+    <h1>Accounts</h1>
+
+    <mat-grid-list cols="3" rowHeight="2:1" *ngIf = "users.length === 0">
+
+        <mat-grid-tile *ngFor = "let i of [1, 2, 3]">
+            <ngx-skeleton-loader appearance="line" [theme]="{height: '200px', width: '500px', marginLeft: '5%'}"></ngx-skeleton-loader>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+
+    <mat-grid-list cols="3" rowHeight="2:1" *ngIf=" usersSearchResult !== []">
+        <mat-grid-tile *ngFor = "let user of usersSearchResult">
+
+            <mat-card class = "user-card">
+                <mat-card-content>
+                    <img [src]="user.getProfilePic()" height="300" width="100%" class = "profile-pic">
+                    <h3 class="username">{{user.getUsername()}}</h3><br>
+                    <button mat-button outline color="primary" (click) = "checkUser(user)" class="button"><b><mat-icon>more_vert</mat-icon></b></button>
+                </mat-card-content>
+            </mat-card>
+                
+        </mat-grid-tile>
+    </mat-grid-list>
+
+
+    <h1>Donation Campaigns</h1>
+
+    <mat-grid-list cols="3" rowHeight="1:1" *ngIf=" donationCampaignsSearchResult !== []">
+        <mat-grid-tile *ngFor = "let donationCampaign of donationCampaignsSearchResult">
+
+            <mat-card class="card">
+                <mat-card-header>
+                    <h1>{{donationCampaign.getTitle()}}</h1>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <img [src]="donationCampaign.getWallpaper()" height="300" width="100%">
+                    <p class="description">{{donationCampaign.getDescription()}}</p>
+                    <button mat-raised-button outline color="primary" (click) = "checkDonationCampaign(donationCampaign)">Details</button>
+                </mat-card-content>
+            </mat-card>
+                
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="3" rowHeight="1:1" *ngIf = "donationCampaigns.length === 0">
+
+        <mat-grid-tile *ngFor = "let i of [1, 2, 3]">
+            <ngx-skeleton-loader appearance="line" [theme]="{height: '700px', width: '500px', marginLeft: '5%', marginBottom: '55%'}"></ngx-skeleton-loader>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+
+
 </div>

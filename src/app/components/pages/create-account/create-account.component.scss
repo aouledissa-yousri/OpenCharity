@@ -1,5 +1,15 @@
 .box {
-    padding-top: 6rem
+    padding-top: 6rem;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
 }
 
 .card{

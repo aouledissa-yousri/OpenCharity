@@ -1,5 +1,5 @@
 
 export const contractAddresses = {
-    balanceContractAddress: "0x4A7C4c695e120709E6B20EA69256590A51aaeB7F",
-    donationContractAddress: "0x9D16AAf8ff73a68102AFdfd67A50226046c0A17e"
+    balanceContractAddress: "0x212b639cEB60d137c061d60D7264550BA3CF488f",
+    donationContractAddress: "0x902d54a34967D339ABdb05CC09193D19E3228490"
 }

@@ -35,6 +35,20 @@ export class DonationCampaignManagementService {
     )
   }
 
+  public async getAllDonationCampaigns() {
+    const donationCampaigns = await firstValueFrom(this.http.get<any[]>(`${API_URL}/donationCampaigns/`))
+    return donationCampaigns.map((donationCampaign: any) => new DonationCampaign(
+      donationCampaign.id,
+      donationCampaign.title,
+      donationCampaign.wallpaper,
+      donationCampaign.description,
+      donationCampaign.beneficiary,
+      donationCampaign.donations,
+      donationCampaign.openStatus,
+      donationCampaign.dateCreated
+    ))
+  }
+
 
   public async addDonationCampaign(title: string, wallpaper: string, description: string){
     await firstValueFrom(this.http.post(

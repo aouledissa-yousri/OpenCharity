@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogContent, MatDialogRef, MatDialogTitle, MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileHelper } from 'src/app/helpers/FileHelper';
@@ -9,10 +9,11 @@ import { User } from 'src/app/models/User';
 import { ProfileComponent } from '../../pages/profile/profile.component';
 import { LoadingDialogComponent } from '../loading-dialog/loading-dialog.component';
 import { ResultDialogComponent } from '../result-dialog/result-dialog.component';
+import { UserEventEmitterService } from 'src/app/event-emitters/UserEventEmitter/user-event-emitter.service';
 
 interface FormDialogData {
   username: string,
-  profilePic: string
+  profilePic: string,
 }
 
 @Component({
@@ -26,13 +27,16 @@ export class FormDialogComponent implements OnInit{
   defaultImage = ""
   image!: File
 
+  updateCompleted = new EventEmitter<void>()
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: FormDialogData,
     private dialogRef: MatDialogRef<FormDialogComponent>,
     private userManagementService: UserManagementService,
     private walletService: WalletService,
     private formBuilder: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userEventEmitter: UserEventEmitterService
   ) {}
 
   ngOnInit(): void {
@@ -85,7 +89,9 @@ export class FormDialogComponent implements OnInit{
       title: "Account Has Been Updated!!",
       description: "Your account information has been successfully updated."
     }})
-    
+
+    this.userEventEmitter.emitUpdateEvent()
+
   }
 
   public closeDialog(){

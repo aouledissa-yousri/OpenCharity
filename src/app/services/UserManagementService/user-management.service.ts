@@ -73,6 +73,18 @@ export class UserManagementService {
     )
   }
 
+  public async getUsers(){
+    const users = await firstValueFrom(this.http.get<any[]>(`${API_URL}/users/`))
+    
+    return users.map((user: any) => new User(
+      user.walletAddress, 
+      user.username,
+      user.profilePic,
+      user.donations,
+      user.donationCampaigns
+    ))
+  }
+
 
   public isConnected(){
     return this.walletService.isConnected()

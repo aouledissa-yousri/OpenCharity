@@ -73,4 +73,8 @@ export class DonationCampaignComponent implements OnInit {
     })
   }
 
+  public isCurrentUser() {
+    return this.donationCampaignData.getBeneficiary() === this.walletService.getWalletAddress()
+  }
+
 }

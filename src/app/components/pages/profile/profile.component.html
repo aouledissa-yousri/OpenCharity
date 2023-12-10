@@ -1,6 +1,6 @@
 <div class="box">
     
-    <div>
+    <div *ngIf = "user.getWalletAddress() !== ''">
         <img [src] = "user.getProfilePic()" class="image">
         <p class="username">
             <span>{{user.getUsername()}}</span> &nbsp;
@@ -24,11 +24,18 @@
         </p>
     </div>
 
+    <div *ngIf = "user.getWalletAddress() === ''">
+        <ngx-skeleton-loader appearance="circle" [theme]="{height: '150px', width: '150px', marginLeft: '45%'}"></ngx-skeleton-loader>
+        <ngx-skeleton-loader appearance="line" [theme]="{height: '20px', width: '700px', marginLeft: '30%'}"></ngx-skeleton-loader>
+    </div>
+
+
+
     <br><br><br><br>
     <h1 style="margin-left: 2%;">Donation Campaigns</h1>
 
 
-        <mat-grid-list cols="3" rowHeight="1:1" >
+        <mat-grid-list cols="3" rowHeight="1:1" *ngIf = "user.getWalletAddress() !== ''">
 
             <mat-grid-tile *ngFor = "let donationCampaign of getDonationCampaigns() | keyvalue">
 
@@ -38,12 +45,20 @@
                     </mat-card-header>
         
                     <mat-card-content>
-                        <img [src]="donationCampaign.value['wallpaper']" height="200" width="100%">
+                        <img [src]="donationCampaign.value['wallpaper']" height="300" width="100%">
                         <p class="description">{{donationCampaign.value["description"]}}</p>
                         <button mat-raised-button outline color="primary" (click) = "checkDonationCampaign(donationCampaign.key)">Details</button>
                     </mat-card-content>
                 </mat-card>
                     
+            </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <mat-grid-list cols="3" rowHeight="1:1" *ngIf = "user.getWalletAddress() === ''">
+
+            <mat-grid-tile *ngFor = "let i of [1, 2, 3]">
+                <ngx-skeleton-loader appearance="line" [theme]="{height: '700px', width: '500px', marginLeft: '2%', marginBottom: '55%'}"></ngx-skeleton-loader>
             </mat-grid-tile>
 
         </mat-grid-list>

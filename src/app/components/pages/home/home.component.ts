@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DonationCampaign } from 'src/app/models/DonationCampaign';
+import { DonationCampaignManagementService } from 'src/app/services/DonationCampaignManagementService/donation-campaign-management.service';
 import { UserManagementService } from 'src/app/services/UserManagementService/user-management.service';
 
 @Component({
@@ -9,12 +12,18 @@ import { UserManagementService } from 'src/app/services/UserManagementService/us
 
 export class HomeComponent implements OnInit{
 
+  donationCampaigns: DonationCampaign[] = []
+
   constructor(
     private userManagementService: UserManagementService,
+    private donationCampaignManagementService: DonationCampaignManagementService,
+    private router: Router
   ){}
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getAllDonationCampaigns()
+  }
 
   
   public async connectWallet(){
@@ -27,6 +36,14 @@ export class HomeComponent implements OnInit{
 
   public async disconnectWallet(){
     this.userManagementService.logout()
+  }
+
+  public async getAllDonationCampaigns(){
+    this.donationCampaigns = await this.donationCampaignManagementService.getAllDonationCampaigns()
+  }
+
+  public checkDonationCampaign(donationCampaign: DonationCampaign){
+    this.router.navigateByUrl(`donation_campaign/${donationCampaign.getId()}`, {state: donationCampaign})
   }
 
 

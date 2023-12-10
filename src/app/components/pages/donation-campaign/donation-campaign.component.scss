@@ -1,6 +1,16 @@
 .box {
     padding-top: 9rem;
-    padding-left: 1rem
+    padding-left: 1rem;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
 }
 
 

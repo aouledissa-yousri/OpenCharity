@@ -23,6 +23,7 @@
     "@ngrx/store": "^16.3.0",
     "axios": "^1.6.2",
     "ethers": "^6.8.1",
+    "ngx-skeleton-loader": "^8.1.0",
     "pinata": "^0.0.1",
     "primeng": "^16.9.1",
     "rxjs": "~7.8.0",

@@ -22,7 +22,7 @@
             
         </p>
 
-        <button mat-raised-button outline color="primary" class="donate" (click)="openDonationDialog()">Donate</button><br><br><br>
+        <button mat-raised-button outline color="primary" class="donate" (click)="openDonationDialog()" *ngIf="!isCurrentUser()">Donate</button><br><br><br>
 
 
         <h1>Donations</h1>

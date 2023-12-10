@@ -1,3 +1,77 @@
 <div class="box">
-    <h1>Home</h1>
+    <div class="header">
+
+       <div class="paragraph">
+            <p style="font-size: 150px; text-align: center"><b>OPENCHARITY</b></p><br><br><br>
+            <p style="font-size: 30px; text-align: center; line-height: 70px;">
+                OpenCharity: Empowering Change through Transparent Giving
+                Imagine a world where every dollar you donate reaches its intended purpose, making a real difference in the lives of those who need it most. That's the vision behind OpenCharity, a decentralized platform designed to revolutionize charitable giving.
+            </p>
+       </div>
+
+
+
+
+
+    </div>
+
+    <br><br><br>
+    
+    <div class="content">
+
+        <h1 style="font-size: 30px; font-weight: bold; margin-left: 33%;">We Are In A Mission To Help The Helpless</h1><br><br><br>
+
+        <div class = "services">
+            
+            <div class = "service">
+                <img src="../../../../assets/water_bottle.png" height="150" width="150" style="margin-left: 26%;">
+                <h2 style="font-weight: bold; color: rgb(28, 28, 114); margin-left: 30%; width: fit-content">Clean Water</h2>
+                <p class="service-text">
+                    Millions of people around the world lack access to clean water. This basic human right is essential for survival, 
+                    yet countless individuals are forced to drink contaminated water, leading to illness, disease, and even death.
+                </p>
+            </div>
+
+            <div class = "service">
+                <img src="../../../../assets/food.png" height="150" width="150" style="margin-left: 26%;">
+                <h2 style="font-weight: bold; color: rgb(28, 28, 114); margin-left: 30%; width: fit-content">Healthy Food</h2>
+                <p class="service-text">
+                    Millions of people in our community, including children and families, struggle with food insecurity. 
+                    This means they don't have enough access to nutritious food to live healthy, active lives.
+                </p>
+            </div>
+
+            <div class = "service">
+                <img src="../../../../assets/book.png" height="150" width="150" style="margin-left: 29%;">
+                <h2 style="font-weight: bold; color: rgb(28, 28, 114); margin-left: 35%; width: fit-content">Education</h2>
+                <p class="service-text">
+                    Education is the cornerstone of a thriving society, empowering individuals and communities to reach their full potential. 
+                    Unfortunately, millions of children around the world lack access to quality education due to poverty, conflict, and other barriers.
+                </p>
+            </div>
+        </div>
+
+        <br><br><br><br><br><br><br>
+
+        <mat-grid-list cols="3" rowHeight="1:1">
+
+            <mat-grid-tile *ngFor = "let donationCampaign of donationCampaigns.slice(0,3)">
+
+                <mat-card class="card">
+                    <mat-card-header>
+                        <h1>{{donationCampaign.getTitle()}}</h1>
+                    </mat-card-header>
+        
+                    <mat-card-content>
+                        <img [src]="donationCampaign.getWallpaper()" height="300" width="100%">
+                        <p class="description">{{donationCampaign.getDescription()}}</p>
+                        <button mat-raised-button outline color="primary" (click) = "checkDonationCampaign(donationCampaign)">Details</button>
+                    </mat-card-content>
+                </mat-card>
+                    
+            </mat-grid-tile>
+
+        </mat-grid-list>
+
+    </div>
 </div>

@@ -16,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader'
 import { Table, TableModule } from 'primeng/table';
 
 
@@ -87,6 +88,7 @@ import { ResultDialogComponent } from './components/dialogs/result-dialog/result
     TableModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSkeletonLoaderModule,
     StoreModule.forRoot({}, {})
   ],
   providers: [],

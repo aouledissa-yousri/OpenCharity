@@ -5,13 +5,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WalletService } from 'src/app/services/WalletService/wallet.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormDialogComponent } from '../../dialogs/form-dialog/form-dialog.component';
+import { UserEventEmitterService } from 'src/app/event-emitters/UserEventEmitter/user-event-emitter.service';
+import { animate, query, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit, DoCheck{
+export class ProfileComponent implements OnInit{
 
   user: User = new User("", "", "", {}, {})
   balance: number = 0
@@ -23,17 +25,16 @@ export class ProfileComponent implements OnInit, DoCheck{
     private walletService : WalletService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private userEventEmitter: UserEventEmitterService
   ){}
 
 
   ngOnInit(): void {
     this.getUserData().then(data => this.getBalance())
+    this.userEventEmitter.updateEvent.subscribe(() => this.getUserData().then(data => this.getBalance()))
   }
 
-  ngDoCheck(): void {
-    //this.getUserData()
-  }
 
   private async getUserData(){
     this.activatedRoute.paramMap.subscribe(parameters => {
@@ -62,7 +63,7 @@ export class ProfileComponent implements OnInit, DoCheck{
     this.dialog.open(FormDialogComponent, {
       data: {
         username: this.user.getUsername(),
-        profilePic: this.user.getProfilePic()
+        profilePic: this.user.getProfilePic(),
       }
       
     })
